@@ -246,7 +246,7 @@ public class InsulinSimulatorController {
 					
 					if(StaticValues.TempBSL < 70 && StaticValues.CurrentBSL < 70) {
 						showChangeinBSLMessages(StaticValues.CurrentBSL);
-						autoInjectionStarted = true;
+						autoInjectionStarted = true;			
 					}
 	
 					bsl = BSLCalculation.getInstance().bslOnGlucagonDosage(CheckForGlucagonLevel(true));
@@ -540,49 +540,5 @@ public class InsulinSimulatorController {
 		addMessage(glucagonLevel + "" + ipGlucagon);
 	}
 }
-
-// The method will get the raise in BSL value
-//public double getBloodSugarLevel(){	
-//	double bsl = 0;
-//	
-//	// will be true when user take food or exercise
-//	if(checkForBsl) {
-//		
-//		// check for raise in BSL for 1min 15sec and make the BSL varies when its Ideal 
-//		if(increasingCarboCounter <= 25) {
-//			bsl = BSLCalculation.getInstance().bslAfterActivity(StaticValues.CarbohydrateIntake , 1 * increasingCarboCounter);
-//		}
-//		else {
-//			bsl = BSLCalculation.getInstance().bslOnIdeal();
-//		}
-//		
-//		bsl = Double.parseDouble(new DecimalFormat("###.##").format(bsl));
-//		
-//		if(bsl != StaticValues.CurrentBSL) {
-//			StaticValues.TempBSL = StaticValues.CurrentBSL;
-//		}
-//		StaticValues.CurrentBSL = bsl;
-//		
-//		showChangeinBSLMessages(bsl);
-//		
-//		if(isAutoMode ||  increasingCarboCounter < 2) {
-//			// Check for Insulin and GLucagon and injection of hormones
-//			if((StaticValues.CurrentBSL > StaticValues.MaximumBloodSugarLevel || StaticValues.CurrentBSL < StaticValues.MinimumBloodSugarLevel)) {
-//				CheckForInsulinLevel();
-//				CheckForGlucagonLevel();
-//			}
-//		}
-//		else if(!inManualInject){
-//			currentBSLTextBox.setText(Double.toString(StaticValues.CurrentBSL));
-//			previousBSLTextBox.setText(Double.toString(StaticValues.TempBSL));
-//			return  StaticValues.CurrentBSL;
-//		}
-//		increasingCarboCounter++;
-//	}
-//	
-//	currentBSLTextBox.setText(Double.toString(StaticValues.CurrentBSL));
-//	previousBSLTextBox.setText(Double.toString(StaticValues.TempBSL));
-//    return  StaticValues.CurrentBSL;     
-//}
 
 
