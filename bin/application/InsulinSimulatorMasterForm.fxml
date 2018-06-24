@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="simulatorId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InsulinSimulatorController">
+   <children>
+      <SplitPane dividerPositions="0.18292682926829268" orientation="VERTICAL" prefHeight="520.0" prefWidth="1000.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="89.0" prefWidth="988.0">
+               <children>
+                  <Group layoutX="238.0" layoutY="11.0">
+                     <children>
+                        <ProgressBar fx:id="InsulinProgressBar" layoutX="100.0" prefWidth="200.0" progress="0.0" />
+                        <Label layoutX="9.0" layoutY="2.0" prefHeight="18.0" prefWidth="112.0" text="Insulin Bank" />
+                        <Label layoutX="-7.0" layoutY="41.0" prefHeight="18.0" prefWidth="123.0" text="Glucogan Bank" />
+                        <ProgressBar fx:id="GlucagonProgressBar" layoutX="100.0" layoutY="42.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressIndicator fx:id="InsulinPgIc" layoutX="305.0" layoutY="-1.0" prefHeight="21.0" prefWidth="44.0" progress="1.0" />
+                        <ProgressIndicator fx:id="GlucagonPgIc" layoutX="304.0" layoutY="42.0" prefHeight="21.0" prefWidth="44.0" progress="1.0" />
+                        <ImageView fx:id="imgInsulinRefill" fitHeight="30.0" fitWidth="50.0" layoutX="354.0" layoutY="-7.0" onMouseClicked="#insulinRefillClick" pickOnBounds="true" preserveRatio="true">
+                        <image>
+		                <Image url="img/refillIcon.PNG" />
+		                </image>
+                        </ImageView>
+                        <ImageView fx:id="imgGlucagonRefill" fitHeight="30.0" fitWidth="50.0" layoutX="352.0" layoutY="34.0" onMouseClicked="#glucagonRefillClick" pickOnBounds="true" preserveRatio="true">
+       					<image>
+                  		<Image url="img/refillIcon.PNG" />
+                  		</image>                
+                        </ImageView>
+                     </children>
+                  </Group>
+                  <ImageView fx:id="imgSettings" fitHeight="40.0" fitWidth="50.0" layoutX="897.0" layoutY="14.0" onMouseClicked="#settingsClick" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                  <Image url="img/settings.png" />
+                  </image>
+                  </ImageView>
+                  <ImageView fx:id="imgBattery" fitHeight="40.0" fitWidth="50.0" layoutX="941.0" layoutY="14.0" onMouseClicked="#batteryChargeClick" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                  <Image url="img/fullCharge.PNG" />
+                  </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#closeApplication" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                  <Image url="img/powerIcon.PNG" />
+                  </image>
+                  </ImageView>
+                  <Button fx:id="btnAuto" ellipsisString="" layoutX="64.0" layoutY="14.0" minWidth="44.0" mnemonicParsing="false" onAction="#autoModeClick" prefHeight="40.0" prefWidth="68.0" style="-fx-background-color: #90EE90;;" text="Auto" />
+                  <Group fx:id="grpManualInj" layoutX="634.0" layoutY="14.0">
+                     <children>
+                        <Button fx:id="btnInsulinInj" layoutX="110.0" layoutY="-7.0" mnemonicParsing="false" onAction="#btnInsulinInj" text="Inject" />
+                        <TextField fx:id="txtInsulinInj" layoutY="-8.0" onAction="#btnInsulinInj" prefHeight="25.0" prefWidth="100.0" />
+                        <Button fx:id="btnGlucagonInj" layoutX="110.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnGlucagonInj" text="Inject" />
+                        <TextField fx:id="txtGlucagonInj" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" />
+                     </children>
+                  </Group>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="988.0">
+               <children>
+                  <LineChart fx:id="bloodSugarLevelChart" createSymbols="false" layoutX="36.0" layoutY="26.0" prefHeight="390.0" prefWidth="916.0" title="Blood Sugar Level">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="yAxis" side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.7829614604462475" layoutY="503.0" prefHeight="293.0" prefWidth="1000.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="191.0" prefWidth="768.0">
+               <children>
+                  <ListView fx:id="msgBox" layoutY="27.0" prefHeight="263.0" prefWidth="777.0" />
+                  <Label ellipsisString="" layoutX="262.0" layoutY="-1.0" prefHeight="26.0" prefWidth="273.0" style="-fx-font-size: 24px; -fx-text-fill: red; -fx-font-weight: bold;" text="Simulator Messages" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="64.0" layoutY="21.0" text="Previous BSL:" />
+                  <Label layoutX="64.0" layoutY="110.0" text="Current BSL:" />
+                  <TextField fx:id="currentBSLTextBox" disable="true" layoutX="55.0" layoutY="134.0" prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="previousBSLTextBox" disable="true" layoutX="55.0" layoutY="43.0" prefHeight="25.0" prefWidth="100.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
