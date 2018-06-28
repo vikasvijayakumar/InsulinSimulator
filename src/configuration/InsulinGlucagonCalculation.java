@@ -7,32 +7,6 @@ public class InsulinGlucagonCalculation {
 	private static double calculatedinsulindose;
 	private static double calculatedGlucagondose;
 	
-//	public static Double computeIDose(double currentBSL) {
-//		calculatedinsulindose = 0;
-//			if (currentBSL >= StaticValues.MaximumBloodSugarLevel) {
-//				StaticValues.insulinToCarbo = StaticValues.CarbohydrateIntake / StaticValues.ICR;
-//				System.out.println("Insulin to carbo : " + StaticValues.insulinToCarbo);
-//				
-//				double insulinCorrectionFactor = ((currentBSL - StaticValues.TargetBSL) / StaticValues.ISF);
-//				System.out.println("Insulin Correction Factor : " + insulinCorrectionFactor);
-//				
-//				calculatedinsulindose = insulinCorrectionFactor + StaticValues.insulinToCarbo;			
-//				System.out.println("Insulin required : " + calculatedinsulindose);
-//			}
-//		return calculatedinsulindose;
-//	}
-	
-	public static Double getInsulinDosage(double currentBSL) {
-		calculatedinsulindose = 0;
-			if (currentBSL >= StaticValues.MaximumBloodSugarLevel) {
-				// only inject maximum of 1 unit of insulin
-				double insulinCorrectionFactor = Math.min(1, (((currentBSL - StaticValues.MaximumBloodSugarLevel) / StaticValues.ISF)));
-
-				calculatedinsulindose = Double.parseDouble(new DecimalFormat("##.##").format(insulinCorrectionFactor));
-			}
-		return calculatedinsulindose;
-	}
-	
 	public static Double getInsulinDosageValue(double currentBSL) {
 		calculatedinsulindose = 0;
 		if(currentBSL >= StaticValues.MaximumBloodSugarLevel) {
@@ -66,15 +40,6 @@ public class InsulinGlucagonCalculation {
 		return 6;
 	}
 	
-	public static Double getGlucagonDosage(double currentBSL) {
-		calculatedGlucagondose = 0;
-		if (currentBSL < StaticValues.MinimumBloodSugarLevel) {
-			// only inject maximum of 2 units at a time
-			calculatedGlucagondose = Math.min(2 , (StaticValues.MinimumBloodSugarLevel - currentBSL) / 3);
-			calculatedGlucagondose = Double.parseDouble(new DecimalFormat("##.##").format(calculatedGlucagondose));
-		}
-		return calculatedGlucagondose;
-	}
 	
 	public static Double getGlucagonDosageValue(double currentBSL) {
 		calculatedGlucagondose = 0;
