@@ -13,6 +13,7 @@ public class LoginController {
 	@FXML TextField txtUserName;
 	@FXML TextField txtPassword;
 	@FXML Label lblErrorMsg;
+	@FXML InsulinSimulatorController insulinSimulatorController;
 
 	@FXML
     void initialize() {	

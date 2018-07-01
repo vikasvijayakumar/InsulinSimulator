@@ -6,6 +6,7 @@ public class BSLCalculation {
 	public static double k1 = 0.0453;
 	public static double k2 = 0.0224;
 
+	
 	private double bloodsugar = StaticValues.CurrentBSL; 
 
 	public BSLCalculation() {
@@ -26,13 +27,12 @@ public class BSLCalculation {
 
 	public double bslOnIdeal() {
 		bloodsugar = StaticValues.CurrentBSL;
-		bloodsugar -= (5 * (k1 / (k2 - k1)) * (Math.exp(-k1 * 5) - Math.exp(-k2 * 5)));
+		bloodsugar -= (3 * (k1 / (k2 - k1)) * (Math.exp(-k1 * 5) - Math.exp(-k2 * 5)));
 		return bloodsugar;
 	}
 
 	public double bslAfterActivity(double carbs, int t) {
 		if (carbs != 0) {
-			//bloodsugar = (StaticValues.PreviousBSL * Math.exp(-k2 * t)) +  (2 * carbs * (k1 / (k2 - k1)) * (Math.exp(-k1 * t) - Math.exp(-k2 * t)));
 			bloodsugar = (StaticValues.PreviousBSL) +  (2 * carbs * (k1 / (k2 - k1)) * (Math.exp(-k1 * 3 * t) - Math.exp(-k2 * 3 * t)));
 		}
 		return bloodsugar;

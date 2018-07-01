@@ -34,7 +34,7 @@ public class InsulinGlucagonCalculation {
 	}
 	
 	private static double getChangeInBSForGlucagon(double currentBSL) {
-		if(currentBSL >= 65 && currentBSL < 70) {
+		if(currentBSL >= 65 && currentBSL < 80) {
 			return 3;
 		}
 		return 6;

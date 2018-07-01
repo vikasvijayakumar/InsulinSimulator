@@ -11,7 +11,9 @@ import com.sun.javafx.scene.control.skin.ProgressIndicatorSkin;
 
 import configuration.StaticValues;
 import configuration.BSLCalculation;
+import configuration.Battery;
 import configuration.InsulinGlucagonCalculation;
+import configuration.InsulinGlucagonReservior;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -77,6 +79,11 @@ public class InsulinSimulatorController {
 	static LineChart<String, Number> _bloodSugarLevelChart;
 	
 	private static ObservableList<Text> msgBoxItems = FXCollections.observableArrayList();
+	
+	private BSLCalculation bslCalculation;
+	public InsulinGlucagonCalculation insulinGlucagonCalculation;
+	public Battery batteryClass;
+	public InsulinGlucagonReservior insulinGlucagonReservior;
 	
 	@FXML LineChart<String, Number> bloodSugarLevelChart;
 	@FXML Group grpManualInj;
@@ -239,15 +246,12 @@ public class InsulinSimulatorController {
 					showChangeinBSLMessages(StaticValues.CurrentBSL);
 					autoInjectionStarted = true;
 	
-					bsl = BSLCalculation.getInstance().bslOnInsulinDosage(CheckForInsulinLevel(true));
+					bsl = bslCalculation.getInstance().bslOnInsulinDosage(CheckForInsulinLevel(true));
 					StaticValues.CurrentBSL = bsl;
 				}
-				else if(StaticValues.TempBSL < 80 && StaticValues.CurrentBSL < 80) {
-					
-					if(StaticValues.TempBSL < 70 && StaticValues.CurrentBSL < 70) {
-						showChangeinBSLMessages(StaticValues.CurrentBSL);
-						autoInjectionStarted = true;			
-					}
+				else if(StaticValues.TempBSL < 70 && StaticValues.CurrentBSL < 70) {
+					showChangeinBSLMessages(StaticValues.CurrentBSL);
+					autoInjectionStarted = true;
 	
 					bsl = BSLCalculation.getInstance().bslOnGlucagonDosage(CheckForGlucagonLevel(true));
 					StaticValues.CurrentBSL = bsl;
@@ -257,7 +261,7 @@ public class InsulinSimulatorController {
 					bsl = BSLCalculation.getInstance().bslOnIdeal();
 				}
 				else {
-					bsl = BSLCalculation.getInstance().bslAfterActivity(StaticValues.CarbohydrateIntake , 3 * increasingCarboCounter);
+					bsl = BSLCalculation.getInstance().bslAfterActivity(StaticValues.CarbohydrateIntake , 1 * increasingCarboCounter);
 				}
 	
 				bsl = Double.parseDouble(new DecimalFormat("###.##").format(bsl));
@@ -535,9 +539,17 @@ public class InsulinSimulatorController {
 	
 	// The event will handle injection of glucagon in manual mode
 	public void btnGlucagonInj(ActionEvent event) {
-		double glucagonLevel = GlucagonProgressBar.getProgress();
-		double ipGlucagon = Double.parseDouble(txtGlucagonInj.getText());
-		addMessage(glucagonLevel + "" + ipGlucagon);
+		if (StaticValues.CurrentBSL >= 80 && StaticValues.CurrentBSL <= 120) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Alert Dialog");
+	        alert.setHeaderText("Glucagon Injection");
+	        alert.setContentText("Blood Sugar Level is stable. No need to Inject Glucagon");
+	        alert.show();
+	        return;
+		}
+
+		inManualInject = true;
+		inManualIdealDecrease = false;
 	}
 }
 

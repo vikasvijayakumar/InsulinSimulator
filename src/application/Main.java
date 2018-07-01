@@ -16,7 +16,6 @@ public class Main extends Application {
 			primaryStage.setTitle("Insulin Simulator Pump");
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
-			//InsulinSimulatorController controller = new InsulinSimulatorController(primaryStage);
 			primaryStage.show();
 		
 		} catch(Exception e) {

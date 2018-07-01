@@ -19,6 +19,7 @@ public class ConfigurationController {
 	
 	private String actEat = "Eat Food";
 	private String actExercise = "Exercise";
+	private BSLCalculation bslCalculation;
 	
 	@FXML InsulinSimulatorController insulinSimulatorController;
 	@FXML TextField currentBSLTextId;
